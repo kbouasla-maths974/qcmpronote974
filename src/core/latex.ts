@@ -116,8 +116,10 @@ interface LatexStructure {
 
 // Fonction principale : Convertit une chaîne LaTeX en HTML
 export function formatLatexToHtml(text: string): string {
-  const replacer = (match: string, content: string, isBlock = false) => {
-    const [structures, formattedText] = rechercheCaracteresSpeciauxLatex(content);
+  // Correction ici : on remplace 'match' par '_' pour dire qu'on l'ignore
+  const replacer = (_: string, content: string, isBlock = false) => {
+    // Correction ici : on ignore le premier élément du tableau (structures) avec la virgule
+    const [, formattedText] = rechercheCaracteresSpeciauxLatex(content);
     return `<span style="${
       isBlock
         ? "display:block;margin:1em 0;font-family:times;font-size:1.4em;"
